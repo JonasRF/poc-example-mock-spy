@@ -40,4 +40,6 @@ Caixa branca:
 
 ![image](https://github.com/JonasRF/poc-example-mock-spy/assets/77034798/3df13e68-4977-4c4c-bad2-dbd507ea23cf)
 
+À direita uma representação do teste de caixa branca que tem acesso direto ao código fonte; (b) À esquerda o teste de caixa preta onde o que são analisados são os requisitos.
+ - Uma das principais vantagens ao implementar os testes unitários, por exemplo, é proteger os recursos já implementados de serem quebrados à medida que o código muda. Além de proporcionar ao desenvolvedor um senso de proteção da aplicação contra bugs.
 
