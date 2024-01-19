@@ -2,8 +2,8 @@
 ## Competências
  - Parte 1: Avançando nos testes unitários
  -  Abordagens de teste
-    - Caixa branca
-    - Caixa preta
+     - Caixa branca
+     - Caixa preta
 - Principais anotações Mockito
    - @Mock
    - @Spy
