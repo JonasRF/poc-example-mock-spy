@@ -46,7 +46,7 @@ public class ProductService {
 		entity.setPrice(dto.getPrice());
 	}
 
-	protected void validateData(ProductDTO dto) {
+	public void validateData(ProductDTO dto) {
 		if (dto.getName().isBlank()) {
 			throw new InvalidDataException("Campo nome é vazio ou nulo");
 		}

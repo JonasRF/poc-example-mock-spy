@@ -1,0 +1,54 @@
+package com.devsuperior.examplemockspy;
+
+import com.devsuperior.examplemockspy.dto.ProductDTO;
+import com.devsuperior.examplemockspy.entities.Product;
+import com.devsuperior.examplemockspy.repositories.ProductRepository;
+import com.devsuperior.examplemockspy.services.ProductService;
+import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.*;
+import static org.mockito.Mockito.*;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+@ExtendWith(SpringExtension.class)
+public class ProductServiceTests {
+
+    @InjectMocks
+    private ProductService service;
+    @Mock
+    private ProductRepository repository;
+
+    private Long existingId, nonExistingId;
+    private Product product;
+    private ProductDTO productDTO;
+
+    @BeforeEach
+    void setUp(){
+        existingId = 1L;
+        nonExistingId = 100L;
+        product = Factory.createproduct();
+
+        when(repository.save(ArgumentMatchers.any())).thenReturn(product);
+
+        when(repository.getReferenceById(existingId)).thenReturn(product);
+        when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+
+    }
+
+    @Test
+    public void insertShouldReturnProductDTOWhenValidDate() {
+        ProductService serviceSpy = spy(service);
+        productDTO = Factory.creatProductDTO();
+        doNothing().when(serviceSpy).validateData(productDTO);
+
+        ProductDTO result = serviceSpy.insert(productDTO);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getName(), "Playstation");
+    }
+}
