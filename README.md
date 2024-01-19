@@ -43,3 +43,22 @@ Caixa branca:
 À direita uma representação do teste de caixa branca que tem acesso direto ao código fonte; (b) À esquerda o teste de caixa preta onde o que são analisados são os requisitos.
  - Uma das principais vantagens ao implementar os testes unitários, por exemplo, é proteger os recursos já implementados de serem quebrados à medida que o código muda. Além de proporcionar ao desenvolvedor um senso de proteção da aplicação contra bugs.
 
+## Principais anotações Mockito
+@Mock
+Um mock em testes unitários é um objeto que implementa o comportamento de algum componente do sistema. Em outras palavras, substitui as dependências. É muito usado para incluir alguma dependência (ex: Repository ou Service).
+
+@Spy
+A ideia do spy é permitir encapsular a instância de algum objeto existente. É como se ele espionasse um objeto real. Por padrão, o spy irá delegar as chamadas de métodos para o objeto real e rastrear as chamadas e parâmetros. 
+
+É usado em circunstâncias mais específicas quando comparado com o @Mock, sendo elas:
+ - Simular o comportamento de um método da mesma classe que está sendo testada.
+ - Testes Unitários em sistemas legados.
+
+@InjectMocks
+Usado para instanciar o objeto testado automaticamente e injetar todas as dependências anotadas @Mock e @Spy.
+
+## Exemplo utilizando @Mock, @Spy e @InjectMocks
+Considere um serviço ### ProductService que implementa os métodos insert e update de produtos. Cada produto é composto pelos campos id, name e price. Ambos os métodos utilizam uma função ### validateData(), responsável por validar se o nome não é vazio e se o preço é positivo. 
+
+Implemente os testes unitários da camada de serviços para os métodos insert e update considerando os cenários de teste.
+Observação: Assuma que não estamos usando lib de validação
