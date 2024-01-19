@@ -58,7 +58,7 @@ A ideia do spy é permitir encapsular a instância de algum objeto existente. É
 Usado para instanciar o objeto testado automaticamente e injetar todas as dependências anotadas @Mock e @Spy.
 
 ## Exemplo utilizando @Mock, @Spy e @InjectMocks
-Considere um serviço ###ProductService### que implementa os métodos insert e update de produtos. Cada produto é composto pelos campos id, name e price. Ambos os métodos utilizam uma função ###validateData(), responsável por validar se o nome não é vazio e se o preço é positivo. 
+Considere um serviço **ProductService** que implementa os métodos insert e update de produtos. Cada produto é composto pelos campos id, name e price. Ambos os métodos utilizam uma função **validateData()**, responsável por validar se o nome não é vazio e se o preço é positivo. 
 
 Implemente os testes unitários da camada de serviços para os métodos insert e update considerando os cenários de teste.
 Observação: Assuma que não estamos usando lib de validação
