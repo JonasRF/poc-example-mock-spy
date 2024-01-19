@@ -38,4 +38,6 @@ Caixa branca:
     - Diferente do teste de caixa branca, ele possui esse nome porque o código-fonte é ignorado no teste. Assim, ao se utilizar dessa técnica, o tester não está preocupado com os elementos constitutivos do software, mas em como ele funciona.
     - Os principais testes caixa preta são os testes de integração e de API;
 
+![image](https://github.com/JonasRF/poc-example-mock-spy/assets/77034798/3df13e68-4977-4c4c-bad2-dbd507ea23cf)
+
 
