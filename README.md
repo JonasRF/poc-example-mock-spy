@@ -8,10 +8,10 @@
    - @Mock
    - @Spy
    - @InjectMocks
-Exemplo utilização @Mock, @Spy e @InjectMocks
-Introdução à cobertura de código
-Parte 2: Cobertura de código com Jacoco
-Tipos básicos de cobertura de código/testes
+   - Exemplo utilização @Mock, @Spy e @InjectMocks
+ - Introdução à cobertura de código
+- Parte 2: Cobertura de código com Jacoco
+   - Tipos básicos de cobertura de código/testes
 Statement Coverage (Line Coverage)
 Branch Coverage
 Function Coverage
