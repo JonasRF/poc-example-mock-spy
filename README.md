@@ -1,13 +1,13 @@
 ## Cobertura de código com Jacoco
 ## Competências
  - Parte 1: Avançando nos testes unitários
-       -  Abordagens de teste
-          - Caixa branca
-          - Caixa preta
-       -   Principais anotações Mockito
-          - @Mock
-          - @Spy
-          - @InjectMocks
+ -  Abordagens de teste
+   - Caixa branca
+   - Caixa preta
+- Principais anotações Mockito
+   - @Mock
+   - @Spy
+   - @InjectMocks
 Exemplo utilização @Mock, @Spy e @InjectMocks
 Introdução à cobertura de código
 Parte 2: Cobertura de código com Jacoco
