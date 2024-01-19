@@ -33,8 +33,8 @@ Caixa branca:
  - Nesta técnica são analisados os caminhos básicos do software e a ideia é que esses caminhos sejam testados.
  - Um dos principais testes de caixa branca são os testes unitários;
 
- - ## Caixa preta: 
-   - Baseia-se nos requisitos básicos do software, sendo o foco nos requisitos da aplicação, ou seja, nas ações que deve desempenhar.
+ -## Caixa preta: 
+   -- Baseia-se nos requisitos básicos do software, sendo o foco nos requisitos da aplicação, ou seja, nas ações que deve desempenhar.
    - Diferente do teste de caixa branca, ele possui esse nome porque o código-fonte é ignorado no teste. Assim, ao se utilizar dessa técnica, o tester não está preocupado com os elementos constitutivos do software, mas em como ele funciona.
    - Os principais testes caixa preta são os testes de integração e de API;
 
