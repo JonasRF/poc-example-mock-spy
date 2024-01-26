@@ -4,6 +4,7 @@ import com.devsuperior.examplemockspy.dto.ProductDTO;
 import com.devsuperior.examplemockspy.entities.Product;
 import com.devsuperior.examplemockspy.repositories.ProductRepository;
 import com.devsuperior.examplemockspy.services.ProductService;
+import com.devsuperior.examplemockspy.services.exceptions.InvalidDataException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +33,7 @@ public class ProductServiceTests {
         existingId = 1L;
         nonExistingId = 100L;
         product = Factory.createproduct();
+        productDTO = Factory.creatProductDTO();
 
         when(repository.save(ArgumentMatchers.any())).thenReturn(product);
 
@@ -39,7 +41,6 @@ public class ProductServiceTests {
         when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
     }
-
     @Test
     public void insertShouldReturnProductDTOWhenValidDate() {
         ProductService serviceSpy = spy(service);
@@ -50,5 +51,29 @@ public class ProductServiceTests {
 
         Assertions.assertNotNull(result);
         Assertions.assertEquals(result.getName(), "Playstation");
+    }
+
+    @Test
+    public void insertShouldReturnInvalidDataExceptionWhenProductNameIsBlank() {
+        productDTO.setName("");
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.insert(productDTO);
+        });
+    }
+
+    @Test
+    public void insertShouldReturnInvalidDataExceptionWhenProductPriceIsInvalid() {
+        productDTO.setPrice(-10.0);
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.insert(productDTO);
+        });
     }
 }
