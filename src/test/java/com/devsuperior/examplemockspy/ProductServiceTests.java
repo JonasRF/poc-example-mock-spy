@@ -5,6 +5,7 @@ import com.devsuperior.examplemockspy.entities.Product;
 import com.devsuperior.examplemockspy.repositories.ProductRepository;
 import com.devsuperior.examplemockspy.services.ProductService;
 import com.devsuperior.examplemockspy.services.exceptions.InvalidDataException;
+import com.devsuperior.examplemockspy.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,6 @@ public class ProductServiceTests {
     @Test
     public void insertShouldReturnProductDTOWhenValidDate() {
         ProductService serviceSpy = spy(service);
-        productDTO = Factory.creatProductDTO();
         doNothing().when(serviceSpy).validateData(productDTO);
 
         ProductDTO result = serviceSpy.insert(productDTO);
@@ -74,6 +74,75 @@ public class ProductServiceTests {
 
         Assertions.assertThrows(InvalidDataException.class, () -> {
             ProductDTO result = serviceSpy.insert(productDTO);
+        });
+    }
+
+    @Test
+    public void updateShouldReturnProductDTOWhenIdExistsAndValidateData(){
+        ProductService serviceSpy = spy(service);
+        doNothing().when(serviceSpy).validateData(productDTO);
+
+        ProductDTO result = serviceSpy.update(existingId, productDTO);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getId(), existingId);
+    }
+
+    @Test
+    public void updateShouldReturnInvalidDataExceptionWhenIdExistsAndProductNameIsBlank() {
+        productDTO.setName("");
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.update(existingId, productDTO);
+        });
+    }
+
+    @Test
+    public void updateShouldReturnInvalidDataExceptionWhenIdExistsAndProductPriceIsNegativeOrZero() {
+        productDTO.setPrice(-10.0);
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.update(existingId, productDTO);
+        });
+    }
+
+    @Test
+    public void updateShouldReturnResourceNotFoundExceptionWhenIdExistsAndValidateData(){
+        ProductService serviceSpy = spy(service);
+        doNothing().when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            ProductDTO result = serviceSpy.update(nonExistingId, productDTO);
+        });
+    }
+
+    @Test
+    public void updateShouldReturnResourceNotFoundExceptionWhenIdExistsAndProductNameIsBlank(){
+        productDTO.setName("");
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.update(nonExistingId, productDTO);
+        });
+    }
+
+    @Test
+    public void updateShouldReturnResourceNotFoundExceptionWhenIdExistsAndProductPriceOrZero(){
+        productDTO.setPrice(-10.0);
+
+        ProductService serviceSpy = spy(service);
+        doThrow(InvalidDataException.class).when(serviceSpy).validateData(productDTO);
+
+        Assertions.assertThrows(InvalidDataException.class, () -> {
+            ProductDTO result = serviceSpy.update(nonExistingId, productDTO);
         });
     }
 }
